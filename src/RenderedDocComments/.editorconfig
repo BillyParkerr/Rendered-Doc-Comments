@@ -1,0 +1,17 @@
+# Editor components (MEF taggers, adornment layers, margins, the view controller and the
+# card renderer) are created and called by the VS editor on the UI thread, and schedule
+# follow-up work with WPF Dispatcher priorities on purpose (e.g. "after the current outlining
+# command, before the next render"). The VS threading analyzers can't see that contract, so
+# they are quieted for these folders only; everything else keeps the full checks.
+[{Editor,Rendering}/**.cs]
+dotnet_diagnostic.VSTHRD001.severity = none
+dotnet_diagnostic.VSTHRD010.severity = none
+dotnet_diagnostic.VSTHRD110.severity = none
+
+# Guard reports errors from any thread: it only touches the status bar after checking it is on
+# the UI thread, and queues guarded work with a Dispatcher priority like the editor code does.
+[Diagnostics/**.cs]
+dotnet_diagnostic.VSTHRD001.severity = none
+dotnet_diagnostic.VSTHRD010.severity = none
+dotnet_diagnostic.VSTHRD108.severity = none
+dotnet_diagnostic.VSTHRD110.severity = none

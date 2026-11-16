@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="src/RenderedDocComments/RenderedDocComments.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="tests/RenderedDocComments.Tests/RenderedDocComments.Tests.csproj" />
+</Solution>

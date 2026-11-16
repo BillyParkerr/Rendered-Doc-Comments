@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Open this project in the experimental instance (not the extension's solution) so Roslyn
+       can resolve the crefs in DocCommentSamples.cs for Go To Definition and link tooltips. -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <!-- The sample deliberately contains a malformed comment and an untagged one. -->
+    <NoWarn>$(NoWarn);CS1570;CS1587;CS1591</NoWarn>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,14 @@
+# Store text with LF line endings in the repository; check it out with the platform's own.
+* text=auto
+
+# Visual Studio files that VS itself writes with CRLF.
+*.sln text eol=crlf
+*.slnx text eol=crlf
+*.csproj text eol=crlf
+*.vsct text eol=crlf
+*.vsixmanifest text eol=crlf
+*.resx text eol=crlf
+
+*.png binary
+*.ico binary
+*.vsix binary

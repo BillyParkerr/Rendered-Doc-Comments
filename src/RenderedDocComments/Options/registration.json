@@ -1,0 +1,128 @@
+/***
+ * Settings for Visual Studio's Settings window (Unified Settings), registered by
+ * [ProvideSettingsManifest] on the package. The schema is Common7\IDE\UnifiedSettings\
+ * registration.schema.json in a Visual Studio 2026 install.
+ *
+ * Each stored setting is kept in step, both ways, with the value the extension has always kept
+ * in Visual Studio's user settings store (collection "RenderedDocComments"), which the classic
+ * Tools > Options page also uses. The shortcut has no stored value of its own: changing it sets
+ * Visual Studio's key binding (see ExtensionOptions).
+ */
+{
+  "properties": {
+    "renderedDocComments.renderByDefault": {
+      "type": "boolean",
+      "title": "Render comments when a file opens",
+      "description": "Show documentation comments as cards when a file opens. When off, comments start as raw text, and the ones you switch to cards are remembered instead. Applies to files opened after the change.",
+      "default": true,
+      "order": 10,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\RenderByDefault"
+          }
+        }
+      }
+    },
+    "renderedDocComments.showGutterIcon": {
+      "type": "boolean",
+      "title": "Show gutter icon",
+      "description": "Show the pencil (edit) and book (render) icon next to the line numbers on every documentation comment.",
+      "default": true,
+      "order": 20,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\ShowGutterIcon"
+          }
+        }
+      }
+    },
+    "renderedDocComments.maxCardWidth": {
+      "type": "integer",
+      "title": "Maximum card width",
+      "description": "Widest a card gets, in pixels. Cards also shrink to fit the editor window.",
+      "default": 760,
+      "minimum": 280,
+      "maximum": 4000,
+      "order": 30,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\MaxCardWidth"
+          }
+        }
+      }
+    },
+    "renderedDocComments.textFont": {
+      "type": "string",
+      "title": "Text font",
+      "description": "Font for card text. Code in cards keeps the editor font.",
+      "default": "Segoe UI Variable Text, Segoe UI",
+      "order": 40,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\ProseFontFamily"
+          }
+        }
+      }
+    },
+    "renderedDocComments.textSizePercent": {
+      "type": "integer",
+      "title": "Text size (%)",
+      "description": "Card text size relative to the editor font size, from 50 to 200.",
+      "default": 100,
+      "minimum": 50,
+      "maximum": 200,
+      "order": 50,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\ProseFontSizePercent"
+          }
+        }
+      }
+    },
+    "renderedDocComments.showCardsOnHover": {
+      "type": "boolean",
+      "title": "Show cards on hover",
+      "description": "Hovering over a name shows its documentation as a card instead of Visual Studio's tooltip (Quick Info). Where there's an error or warning under the mouse, Visual Studio's tooltip shows as usual, and Ctrl+K, Ctrl+I still shows it.",
+      "default": false,
+      "order": 60,
+      "migration": {
+        "pass": {
+          "mode": "full",
+          "input": {
+            "store": "VsUserSettingsRegistry",
+            "path": "RenderedDocComments\\ShowCardsOnHover"
+          }
+        }
+      }
+    },
+    "renderedDocComments.quickDocumentationShortcut": {
+      "type": "string",
+      "title": "Quick documentation shortcut",
+      "description": "Keys that show the documentation of the name at the cursor, such as Ctrl+Shift+F1, or Ctrl+K, Ctrl+Q for two keys in a row. Leave empty for no shortcut. Changing it sets Visual Studio's key binding for RenderedDocComments.ShowQuickDocumentation; a change made in the keyboard settings shows here after a restart.",
+      "default": "Ctrl+Shift+F1",
+      "order": 70
+    }
+  },
+  "categories": {
+    "renderedDocComments": {
+      "title": "Rendered Doc Comments",
+      "description": "C# documentation comments shown as cards, and the quick documentation popup.",
+      "legacyOptionPageId": "b6c0a4f2-6d0e-4a52-9a3e-2f1c7d8e5b41"
+    }
+  }
+}

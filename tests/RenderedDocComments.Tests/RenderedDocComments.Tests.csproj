@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <!-- Tests for the parts of the extension that don't need a running Visual Studio: comment
+       scanning, parsing, the code tokenizers, comment keys, <inheritdoc/> resolution and the
+       card renderer. Those source files are compiled straight into this project (no reference to
+       the VSIX project), so the tests run with plain `dotnet test` on the same .NET Framework as VS.
+       The few VS-facing types the renderer touches are stubbed in Fakes\ExtensionStubs.cs. -->
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <IsPackable>false</IsPackable>
+    <RootNamespace>RenderedDocComments.Tests</RootNamespace>
+    <!-- The editor packages pin slightly different versions of their shared dependencies.
+         VSTHRD001: the tests drive WPF's dispatcher directly; there's no Visual Studio
+         JoinableTaskFactory to switch threads with here. -->
+    <NoWarn>$(NoWarn);NU1603;NU1605;NU1608;VSTHRD001</NoWarn>
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+
+    <!-- The versions the extension compiles against (its VS SDK 18.11, and Roslyn 4.14). -->
+    <PackageReference Include="Microsoft.VisualStudio.Text.Data" Version="18.11.46" />
+    <PackageReference Include="Microsoft.VisualStudio.Text.UI.Wpf" Version="18.11.46" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="..\..\src\RenderedDocComments\Parsing\*.cs" LinkBase="Extension\Parsing" />
+    <Compile Include="..\..\src\RenderedDocComments\Rendering\*.cs" LinkBase="Extension\Rendering" />
+    <Compile Include="..\..\src\RenderedDocComments\Navigation\InheritDocResolver.cs" LinkBase="Extension\Navigation" />
+    <Compile Include="..\..\src\RenderedDocComments\Navigation\QuickDocResolver.cs" LinkBase="Extension\Navigation" />
+    <Compile Include="..\..\src\RenderedDocComments\Options\ShortcutText.cs" LinkBase="Extension\Options" />
+  </ItemGroup>
+
+</Project>

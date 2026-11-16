@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+
+  <Commands package="guidRenderedDocCommentsPackage">
+    <Menus>
+      <Menu guid="guidRenderedDocCommentsCmdSet" id="DocCommentsMenu" priority="0x0100" type="Menu">
+        <Parent guid="guidRenderedDocCommentsCmdSet" id="ToolsMenuGroup" />
+        <Strings>
+          <ButtonText>Rendered Doc Comments</ButtonText>
+        </Strings>
+      </Menu>
+    </Menus>
+
+    <Groups>
+      <Group guid="guidRenderedDocCommentsCmdSet" id="ToolsMenuGroup" priority="0x0600">
+        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS" />
+      </Group>
+      <Group guid="guidRenderedDocCommentsCmdSet" id="DocCommentsGroup" priority="0x0100">
+        <Parent guid="guidRenderedDocCommentsCmdSet" id="DocCommentsMenu" />
+      </Group>
+    </Groups>
+
+    <Buttons>
+      <Button guid="guidRenderedDocCommentsCmdSet" id="cmdToggleAtCaret" priority="0x0100" type="Button">
+        <Parent guid="guidRenderedDocCommentsCmdSet" id="DocCommentsGroup" />
+        <Strings>
+          <ButtonText>Toggle Rendered View</ButtonText>
+          <CanonicalName>.RenderedDocComments.ToggleRenderedView</CanonicalName>
+          <LocCanonicalName>.RenderedDocComments.ToggleRenderedView</LocCanonicalName>
+        </Strings>
+      </Button>
+      <Button guid="guidRenderedDocCommentsCmdSet" id="cmdToggleAll" priority="0x0101" type="Button">
+        <Parent guid="guidRenderedDocCommentsCmdSet" id="DocCommentsGroup" />
+        <Strings>
+          <ButtonText>Toggle Rendered View for All Comments</ButtonText>
+          <CanonicalName>.RenderedDocComments.ToggleRenderedViewAll</CanonicalName>
+          <LocCanonicalName>.RenderedDocComments.ToggleRenderedViewAll</LocCanonicalName>
+        </Strings>
+      </Button>
+      <Button guid="guidRenderedDocCommentsCmdSet" id="cmdQuickDoc" priority="0x0102" type="Button">
+        <Parent guid="guidRenderedDocCommentsCmdSet" id="DocCommentsGroup" />
+        <Strings>
+          <ButtonText>Show Quick Documentation</ButtonText>
+          <CanonicalName>.RenderedDocComments.ShowQuickDocumentation</CanonicalName>
+          <LocCanonicalName>.RenderedDocComments.ShowQuickDocumentation</LocCanonicalName>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <KeyBindings>
+    <KeyBinding guid="guidRenderedDocCommentsCmdSet" id="cmdToggleAtCaret" editor="guidVSStd97" key1="M" mod1="Control" key2="Q" mod2="Control" />
+    <KeyBinding guid="guidRenderedDocCommentsCmdSet" id="cmdToggleAll" editor="guidVSStd97" key1="M" mod1="Control" key2="W" mod2="Control" />
+    <!-- In the Text Editor scope, which wins over global bindings of the same keys while an editor has focus. -->
+    <KeyBinding guid="guidRenderedDocCommentsCmdSet" id="cmdQuickDoc" editor="guidTextEditorScope" key1="VK_F1" mod1="Control Shift" />
+  </KeyBindings>
+
+  <Symbols>
+    <GuidSymbol name="guidRenderedDocCommentsPackage" value="{4fe8fd1a-ded2-4538-a087-90952ef3ee1a}" />
+
+    <!-- The "Text Editor" key binding scope. -->
+    <GuidSymbol name="guidTextEditorScope" value="{8B382828-6202-11D1-8870-0000F87579D2}" />
+
+    <GuidSymbol name="guidRenderedDocCommentsCmdSet" value="{03921a73-acd4-44a2-9e52-adb881b2942b}">
+      <IDSymbol name="ToolsMenuGroup" value="0x1020" />
+      <IDSymbol name="DocCommentsMenu" value="0x1021" />
+      <IDSymbol name="DocCommentsGroup" value="0x1022" />
+      <IDSymbol name="cmdToggleAtCaret" value="0x0100" />
+      <IDSymbol name="cmdToggleAll" value="0x0101" />
+      <IDSymbol name="cmdQuickDoc" value="0x0102" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>

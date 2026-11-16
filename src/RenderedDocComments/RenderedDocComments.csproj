@@ -1,0 +1,68 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net472</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <RootNamespace>RenderedDocComments</RootNamespace>
+    <AssemblyName>RenderedDocComments</AssemblyName>
+
+    <!-- VSIX settings (same as the VS 2026 "VSIX Project" template) -->
+    <VSSDKBuildToolsAutoSetup>true</VSSDKBuildToolsAutoSetup>
+    <GeneratePkgDefFile>true</GeneratePkgDefFile>
+
+    <!-- The VS SDK packages reference a newer Roslyn (5.x) than the 4.14 we compile against
+         below. Harmless: Roslyn isn't shipped in the VSIX, and VS binds every reference to its
+         own copy at runtime. -->
+    <MSBuildWarningsAsMessages>$(MSBuildWarningsAsMessages);MSB3277</MSBuildWarningsAsMessages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectCapability Include="CreateVsixContainer" />
+  </ItemGroup>
+
+  <!-- The VS SDK's Shell.Styles package adds this as content (input for its own code
+       generator); it isn't part of the extension, so keep it out of the VSIX. -->
+  <ItemGroup>
+    <Content Remove="$(NuGetPackageRoot)microsoft.visualstudio.shell.styles\**\NativeMethods.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="18.11.1036" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="18.11.1034" />
+  </ItemGroup>
+
+  <!-- Roslyn, for resolving and navigating to cref targets. Compiled against the version in
+       VS 2022 17.14 (the oldest supported VS); at runtime VS's own, newer copy is used, so
+       nothing from these packages is shipped in the VSIX. -->
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.LanguageServices" Version="4.14.0" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.EditorFeatures.Text" Version="4.14.0" ExcludeAssets="runtime" PrivateAssets="all" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" Version="4.14.0" ExcludeAssets="runtime" PrivateAssets="all" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+
+  <!-- The Settings window's registration (see ProvideSettingsManifest on the package). -->
+  <ItemGroup>
+    <Content Include="Options\registration.json" IncludeInVSIX="true" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <VSCTCompile Include="RenderedDocCommentsPackage.vsct" ResourceName="Menus.ctmenu" />
+    <EmbeddedResource Update="VSPackage.resx">
+      <MergeWithCTO>true</MergeWithCTO>
+      <ManifestResourceName>VSPackage</ManifestResourceName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>
