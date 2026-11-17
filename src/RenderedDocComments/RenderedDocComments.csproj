@@ -27,8 +27,12 @@
     <Content Remove="$(NuGetPackageRoot)microsoft.visualstudio.shell.styles\**\NativeMethods.txt" />
   </ItemGroup>
 
+  <!-- Compiled against the VS 2022 17.14 SDK, the oldest Visual Studio the extension supports:
+       an extension built for 17.x also loads in VS 2026, but one built against the 18.x SDK
+       references 18.0 assemblies that VS 2022 doesn't have. The build tools only package the
+       VSIX, so they're the current ones (the 17.x tools can't package SDK-style projects). -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="18.11.1036" ExcludeAssets="runtime" />
+    <PackageReference Include="Microsoft.VisualStudio.SDK" Version="17.14.40265" ExcludeAssets="runtime" />
     <PackageReference Include="Microsoft.VSSDK.BuildTools" Version="18.11.1034" />
   </ItemGroup>
 

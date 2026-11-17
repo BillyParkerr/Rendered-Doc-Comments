@@ -101,6 +101,16 @@ The extension runs on every keystroke and scroll, so it's built to do as little 
 - While Visual Studio is idle, cards about a screen above and below the view are built one at a time, so scrolling finds them ready. Each editor keeps at most 120 built cards.
 - Roslyn work (`<inheritdoc/>`, link tooltips, Go To Definition, quick documentation) runs on a background thread. `<inheritdoc/>` cards look up their inherited docs again only after typing pauses (0.6 s).
 
+## Releasing
+
+The extension is compiled against the Visual Studio 2022 17.14 SDK, the oldest version it supports, so one `.vsix` installs on both Visual Studio 2022 and 2026. Don't move the `Microsoft.VisualStudio.SDK` package to an 18.x version: the DLL would then reference assemblies Visual Studio 2022 doesn't have, and it would fail to load there.
+
+1. Set the version in `src/RenderedDocComments/source.extension.vsixmanifest` (`Identity`'s `Version`), and add a section for it to `CHANGELOG.md`.
+2. Build in Release: `src/RenderedDocComments/bin/Release/net472/RenderedDocComments.vsix`.
+3. Install that `.vsix` in Visual Studio 2022 and 2026 and check it works.
+4. Commit, tag the commit `v<version>` (for example `git tag -a v1.0.0 -m "Rendered Doc Comments 1.0.0"`), and push both: `git push origin main v1.0.0`.
+5. On GitHub, open **Releases > Draft a new release**, choose the tag, paste the version's changelog section as the description, attach the `.vsix`, and publish.
+
 ## Contributing
 
 - Run the tests before sending a pull request, and add tests for parsing, rendering or Roslyn changes where you can.

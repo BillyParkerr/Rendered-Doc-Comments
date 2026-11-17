@@ -13,11 +13,16 @@ A Visual Studio extension that shows C# `///` documentation comments as clean, r
 
 ## Requirements
 
-Visual Studio 2026, with C# files.
+Visual Studio 2026, or Visual Studio 2022 version 17.14 or later, with C# files.
 
 ## Installing
 
-The extension isn't on the Visual Studio Marketplace yet. Until it is, build it from source ([docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) explains how) and double-click the `.vsix` it produces.
+1. Download `RenderedDocComments.vsix` from the [latest release](https://github.com/BillyParkerr/Rendered-Doc-Comments/releases/latest).
+2. Double-click it and follow the installer. It asks you to close Visual Studio if it's open.
+
+To update, install a newer release the same way. To uninstall, use **Extensions > Manage Extensions** in Visual Studio.
+
+You can also build it from source: see [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md).
 
 ## Using it
 
@@ -63,7 +68,7 @@ Turn on **Show cards on hover** in the options to see the popup when you hover a
 
 ## Options
 
-**Tools > Options > Rendered Doc Comments**, in Visual Studio's Settings window (or search there for "Rendered Doc Comments"). Changes apply straight away.
+**Tools > Options > Rendered Doc Comments**. In Visual Studio 2026 they're in the Settings window (or search there for "Rendered Doc Comments"); in Visual Studio 2022 they're on the classic **Rendered Doc Comments > General** page. Changes apply straight away.
 
 | Option | What it does |
 |---|---|

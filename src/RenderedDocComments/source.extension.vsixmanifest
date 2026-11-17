@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="RenderedDocComments.b8b4fd44-2549-4095-998d-7f2a5aee7fe7" Version="0.1" Language="en-US" Publisher="Billy Parker" />
+    <Identity Id="RenderedDocComments.b8b4fd44-2549-4095-998d-7f2a5aee7fe7" Version="1.0.0" Language="en-US" Publisher="Billy Parker" />
     <DisplayName>Rendered Doc Comments</DisplayName>
     <Description xml:space="preserve">Shows C# /// documentation comments as readable cards, with clickable links and your theme's code colours, and switches them back to raw text for editing. Ctrl+Shift+F1 shows the rendered documentation of any symbol, .NET's included.</Description>
+    <MoreInfo>https://github.com/BillyParkerr/Rendered-Doc-Comments</MoreInfo>
   </Metadata>
   <Installation>
     <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[17.14, )">
