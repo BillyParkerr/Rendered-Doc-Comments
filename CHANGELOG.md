@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Quick documentation showed "readonly" twice for readonly structs, such as `readonly readonly struct TimeSpan`.
+
 ## 1.0.0
 
 First release.

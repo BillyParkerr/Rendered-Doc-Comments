@@ -365,23 +365,19 @@ namespace RenderedDocComments.Navigation
             return ns == null || ns.IsGlobalNamespace ? null : ns.ToDisplayString();
         }
 
-        /// <summary>static / abstract / sealed / readonly / ref, which the type keyword display leaves out.</summary>
+        /// <summary>
+        /// static / abstract / sealed for classes, which the type keyword display leaves out.
+        /// (It already includes a struct's readonly and ref.)
+        /// </summary>
         private static IEnumerable<SignaturePart> TypeModifiers(INamedTypeSymbol type)
         {
-            var words = new List<string>();
-            if (type.TypeKind == TypeKind.Class)
-            {
-                if (type.IsStatic) words.Add("static");
-                else if (type.IsAbstract) words.Add("abstract");
-                else if (type.IsSealed) words.Add("sealed");
-            }
-            else if (type.TypeKind == TypeKind.Struct)
-            {
-                if (type.IsReadOnly) words.Add("readonly");
-                if (type.IsRefLikeType) words.Add("ref");
-            }
+            string word = type.TypeKind != TypeKind.Class ? null
+                : type.IsStatic ? "static"
+                : type.IsAbstract ? "abstract"
+                : type.IsSealed ? "sealed"
+                : null;
 
-            foreach (var word in words)
+            if (word != null)
             {
                 yield return new SignaturePart(word, CodeTokenKind.Keyword);
                 yield return new SignaturePart(" ", CodeTokenKind.Plain);

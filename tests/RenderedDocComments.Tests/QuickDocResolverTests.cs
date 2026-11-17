@@ -83,6 +83,24 @@ namespace Shop
 
         public static void Undocumented() { }
     }
+
+    /// <summary>Money.</summary>
+    public readonly struct Money { }
+
+    /// <summary>A stack-only buffer.</summary>
+    public ref struct Buffer { }
+
+    /// <summary>A read-only stack-only buffer.</summary>
+    public readonly ref struct ReadOnlyBuffer { }
+
+    /// <summary>A plain struct.</summary>
+    public struct Point { }
+
+    /// <summary>Helpers.</summary>
+    public static class Tools { }
+
+    /// <summary>A base.</summary>
+    public abstract class Shape { }
 }
 ";
 
@@ -243,6 +261,19 @@ namespace Shop
             Assert.Equal("local variable", content.Kind);
             Assert.Equal("string trimmed", Signature(content));
             Assert.Null(content.Xml);
+        }
+
+        [Theory]
+        [InlineData("public readonly struct Money", "Money", "readonly struct Money")]
+        [InlineData("public ref struct Buffer", "Buffer", "ref struct Buffer")]
+        [InlineData("public readonly ref struct ReadOnlyBuffer", "ReadOnlyBuffer", "readonly ref struct ReadOnlyBuffer")]
+        [InlineData("public struct Point", "Point", "struct Point")]
+        [InlineData("public static class Tools", "Tools", "static class Tools")]
+        [InlineData("public abstract class Shape", "Shape", "abstract class Shape")]
+        [InlineData("public class Gadget", "Gadget", "class Gadget")]
+        public async Task Type_modifiers_appear_once(string declaration, string name, string signature)
+        {
+            Assert.Equal(signature, Signature((await AtAsync(declaration, name)).Content));
         }
 
         [Fact]
