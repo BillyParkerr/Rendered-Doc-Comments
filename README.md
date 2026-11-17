@@ -2,6 +2,8 @@
 
 A Visual Studio extension that shows C# `///` documentation comments as clean, readable cards, and switches them back to raw text whenever you want to edit them.
 
+![A method's documentation comment shown as a card, with its parameters, return value, exceptions, remarks and a coloured code example](docs/images/card.png)
+
 - **Readable comments.** The summary, then labelled sections for parameters, return value, exceptions, remarks and examples, in your editor's fonts and theme colours.
 - **Clickable links.** Click a type or member to go to its definition, hover it to see its signature. Web links open in your browser.
 - **Coloured code.** Code in comments uses your theme's syntax colours, for C# and also XML, XAML, HTML and JSON.
@@ -10,6 +12,16 @@ A Visual Studio extension that shows C# `///` documentation comments as clean, r
 - **Quick documentation.** `Ctrl+Shift+F1` shows the rendered documentation of any name at the cursor, .NET's included, in a popup. Optionally on hover too.
 - **Everywhere you read code.** Cards also appear in Peek Definition and side-by-side diffs.
 - **Your files are never changed.** Cards are drawn over the editor; the comment text stays exactly as you wrote it.
+
+### Before and after
+
+The same code, with its comments as written:
+
+![Two properties with their documentation comments as raw XML](docs/images/raw.png)
+
+And with Rendered Doc Comments:
+
+![The same two properties with their comments shown as cards](docs/images/cards.png)
 
 ## Requirements
 
@@ -54,6 +66,8 @@ The switching and quick documentation commands are also in **Tools > Rendered Do
 
 `Ctrl+Shift+F1` shows a popup with the rendered documentation of the name at the cursor: a type, method, property, constructor (`new Widget()` and attributes), `var`, a keyword type like `string`, a parameter, a local, or a cref inside a doc comment.
 
+![The quick documentation popup for .NET's TimeSpan.FromMilliseconds, with its signature, parameters, return value and exceptions](docs/images/quick-documentation.png)
+
 - **What it shows:** the namespace (and the assembly, for .NET and NuGet types), the signature in your theme's code colours, then the documentation laid out as on a card. A parameter shows its description from its method's `<param>`. Something without documentation shows just its signature.
 - **Where the documentation comes from:** your code's comments, with `<inheritdoc/>` filled in, or the documentation files that come with .NET and NuGet packages. An override or interface implementation without a comment of its own shows the documentation of what it overrides or implements.
 - **Links:** click a type in the signature or a link in the documentation to show that symbol in the same popup, and the **←** link at the top (or the mouse's Back button) to go back. Click the symbol's own name to go to its definition.
@@ -81,7 +95,11 @@ Turn on **Show cards on hover** in the options to see the popup when you hover a
 
 ## Supported tags
 
-Every C# documentation tag, plus the HTML ones often used in doc comments.
+Every C# documentation tag, plus the HTML ones often used in doc comments. For example, a table list, and code blocks in other languages:
+
+![A card with a table list: a header row, then terms in bold beside their descriptions](docs/images/table-list.png)
+
+![A card with XML, JSON and C# code blocks, each in its own syntax colours](docs/images/code-languages.png)
 
 | Tag | On the card |
 |---|---|
